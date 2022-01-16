@@ -5,7 +5,16 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+
 jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--set-exit-if-changed"
+
   checkstyle_job:
     runs-on: ubuntu-latest
     name: Checkstyle job
