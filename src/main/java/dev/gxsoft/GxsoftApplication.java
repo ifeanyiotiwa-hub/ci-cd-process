@@ -10,7 +10,7 @@ public class GxsoftApplication {
     System.out.println(multiplyTwoInts(5, 10));
   }
 
-  public static int multiplyTwoInts(int x, int y) {
+  public static int multiplyTwoInts(int x, int y){
     return x * y;
   }
 }
