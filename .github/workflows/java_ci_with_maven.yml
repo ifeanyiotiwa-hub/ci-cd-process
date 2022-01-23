@@ -32,17 +32,20 @@ on:
   pull_request:
     branches: [ main, develop ]
 jobs:
-
-  formatting:
+  checkstyle_job:
     runs-on: ubuntu-latest
+    name: Checkstyle job
     steps:
-      - uses: actions/checkout@v2 # v2 minimum required
-      - uses: axel-op/googlejavaformat-action@v3
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run check style
+        uses: nikitasavinov/checkstyle-action@master
         with:
-          args: "--aosp"
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: 'github-pr-check'
+          tool_name: 'testtool'
   build-test:
-    needs: formatting
+    needs: checkstyle_job
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
